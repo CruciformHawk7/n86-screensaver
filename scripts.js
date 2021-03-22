@@ -7,7 +7,7 @@ var blankMethod = false;
 const isBrowserLocale24h = () =>
     !new Intl.DateTimeFormat(navigator.language, { hour: "numeric" })
     .format(0)
-    .match(/AM/);
+    .match(/[AP]M/);
 
 $(() => {
     digits.forEach(digit => {
@@ -28,8 +28,12 @@ function start() {
     let time = new Date();
     if (date == undefined || (date.getMinutes() != time.getMinutes() || date.getHours() != time.getHours())) {
         date = time;
-        const hours = time.getHours();
+        let hours = time.getHours();
         const minutes = time.getMinutes();
+        if (!isBrowserLocale24h()) {
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+        }
         const h1 = Math.floor(hours / 10);
         const h2 = hours % 10;
         const m1 = Math.floor(minutes / 10);
@@ -56,7 +60,7 @@ function setClock(h1, h2, m1, m2) {
         timeout * 4, m2);
 
 
-    if (isBrowserLocale24h) {
+    if (!isBrowserLocale24h()) {
         let isPM = hours >= 12;
         if (wasPM == undefined || wasPM != isPM) {
             wasPM = isPM;
@@ -98,7 +102,7 @@ function setClockViaBlank(h1, h2, m1, m2) {
         timeout * 4.5, m2);
 
 
-    if (isBrowserLocale24h) {
+    if (!isBrowserLocale24h()) {
         let isPM = hours >= 12;
         if (wasPM == undefined || wasPM != isPM) {
             wasPM = isPM;
