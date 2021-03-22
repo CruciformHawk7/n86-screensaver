@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N86 Screensaver</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <main>
+        <div class="main-grid">
+            <div class="padding"></div>
+            <div class="digit-group">
+                <div class="digit digit-1" id="hmsd"></div>
+                <div class="digit digit-2" id="hlsd"></div>
+            </div>
+            <div class="colon" id="colon">
+                <div class="colon-blank"></div>
+                <div class="colored-location colon-1"></div>
+                <div class="colon-blank"></div>
+                <div class="colored-location colon-2"></div>
+                <div class="colon-blank"></div>
+            </div>
+            <div class="digit-group">
+                <div class="digit digit-1" id="mmsd"></div>
+                <div class="digit digit-2" id="mlsd"></div>
+            </div>
+            <div class="padding"></div>
+        </div>
+        <div class="notation-area">
+            <svg class="am" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92.36 56.79" width="50px" background="#0000">
+                <linearGradient id="am-pm-gradient" x1="0%" x2="0%"" y1="0%" y2="100%">
+                    <stop offset="0%" stop-color="var(--color-start)" />
+                    <stop offset="100%" stop-color="var(--color-stop)" />
+                </linearGradient>
+                <path d="M36.24,79.08,32.51,66H13.62L9.88,79.08H2.38L19.25,22.29h9L44.81,79.08ZM31,60.45,23.14,30.78l-8,29.67Z" 
+                      transform="translate(-2.38 -22.29)"/>
+                <path d="M94.74,22.29V79.08h-8V38.13L75.09,59.73h-4L59.36,38.13V79.08h-8V22.29h6.4L73.07,51,88.53,22.29Z" 
+                      transform="translate(-2.38 -22.29)"/>
+            </svg>
+            <svg class="pm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84.59 56.79">
+                <linearGradient id="am-pm-gradient" x1="0%" x2="0%"" y1="0%" y2="100%">
+                    <stop offset="0%" stop-color="var(--color-start)" />
+                    <stop offset="100%" stop-color="var(--color-stop)" />
+                </linearGradient>
+                <path d="M9,22.29h15q8.91,0,13,4.17t4.07,13.39q0,9-4.89,13.86t-14,4.84H17.21V79.08H9Zm8.19,5.45V53h4.6q5.57,0,8.19-3c1.75-2,2.63-5.3,2.63-10s-.81-7.93-2.42-9.7-4.13-2.64-7.56-2.64Z" 
+                      transform="translate(-9.02 -22.29)"/>
+                <path d="M93.61,22.29V79.08h-8V38.13L74,59.73h-4l-11.7-21.6V79.08h-8V22.29h6.4L71.94,51,87.4,22.29Z" 
+                      transform="translate(-9.02 -22.29)"/>
+            </svg>
+        </div>
+    </main>
+</body>
+
+</html>

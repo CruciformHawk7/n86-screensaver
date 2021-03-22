@@ -1,0 +1,219 @@
+* {
+    color: white;
+    background-color: #000;
+}
+
+html,
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.main-grid {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -55%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.digit-group {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.colon,
+.padding {
+    display: none;
+}
+
+.digit {
+    display: grid;
+    height: 100%;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.colored-location {
+    border-radius: 2px;
+}
+
+[id$='-0'].colored-location,
+[id$='-1'].colored-location,
+[id$='-2'].colored-location {
+    background: linear-gradient( #fff, #ddd);
+    box-shadow: 0px 0px 10px 8px #888888;
+    animation: appear-1 300ms ease;
+}
+
+@keyframes appear-1 {
+    from {
+        background: none;
+        box-shadow: none;
+    }
+    to {
+        background: linear-gradient( #fff, #ddd);
+        box-shadow: 0px 0px 10px 8px #888888;
+    }
+}
+
+[id$='-3'].colored-location,
+[id$='-5'].colored-location {
+    background: linear-gradient( #ddd, #bbb);
+    box-shadow: 0px 0px 10px 8px #787878;
+    animation: appear-2 300ms ease;
+}
+
+@keyframes appear-2 {
+    from {
+        background: none;
+        box-shadow: none;
+    }
+    to {
+        background: linear-gradient( #ddd, #bbb);
+        box-shadow: 0px 0px 10px 8px #787878;
+    }
+}
+
+[id$='-6'].colored-location,
+[id$='-7'].colored-location,
+[id$='-8'].colored-location {
+    background: linear-gradient( #bbb, #999);
+    box-shadow: 0px 0px 10px 8px #686868;
+    animation: appear-3 300ms ease;
+}
+
+@keyframes appear-3 {
+    from {
+        background: none;
+        box-shadow: none;
+    }
+    to {
+        background: linear-gradient( #bbb, #999);
+        box-shadow: 0px 0px 10px 8px #686868;
+    }
+}
+
+[id$='-9'].colored-location,
+[id$='-11'].colored-location {
+    background: linear-gradient( #999, #777);
+    box-shadow: 0px 0px 10px 8px #585858;
+    animation: appear-4 300ms ease;
+}
+
+@keyframes appear-4 {
+    from {
+        background: none;
+        box-shadow: none;
+    }
+    to {
+        background: linear-gradient( #999, #777);
+        box-shadow: 0px 0px 10px 8px #585858;
+    }
+}
+
+[id$='-12'].colored-location,
+[id$='-13'].colored-location,
+[id$='-14'].colored-location {
+    background: linear-gradient( #777, #666);
+    box-shadow: 0px 0px 10px 8px #484848;
+    animation: appear-5 300ms ease;
+}
+
+@keyframes appear-5 {
+    from {
+        background: none;
+        box-shadow: none;
+    }
+    to {
+        background: linear-gradient( #777, #666);
+        box-shadow: 0px 0px 10px 8px #484848;
+    }
+}
+
+.am,
+.pm {
+    display: none;
+    background: #0000;
+    width: 50px;
+}
+
+.am>path,
+.pm>path {
+    stroke: url(#am-pm-gradient);
+    fill: url(#am-pm-gradient);
+}
+
+#am-pm-gradient {
+    --color-start: #555;
+    --color-stop: #333;
+}
+
+.notation-area {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+}
+
+.grid-child {
+    margin: 1rem;
+    width: 2rem;
+    height: 2rem;
+    transition: all 300ms ease;
+}
+
+@media screen and (min-width: 800px) {
+    .main-grid {
+        flex-direction: row;
+    }
+    .digit-group {
+        margin: 0;
+        width: auto;
+    }
+    .digit {
+        margin: 0 40px;
+        width: 12rem;
+    }
+    .padding {
+        display: block;
+    }
+    .colon {
+        display: none;
+        grid-template-rows: repeat(5, 1fr);
+        width: 3rem;
+        margin: 0.5rem;
+    }
+    .colon>div {
+        margin: 15px;
+        width: 2rem;
+        height: 2rem;
+    }
+    .notation-area {
+        bottom: 20%;
+        right: 18%;
+    }
+    .colon-1 {
+        background: linear-gradient( #ddd, #bbb);
+        box-shadow: 0px 0px 10px 8px #787878;
+        animation: appear-2 300ms ease;
+    }
+    .colon-2 {
+        background: linear-gradient( #999, #777);
+        box-shadow: 0px 0px 10px 8px #585858;
+        animation: appear-4 300ms ease;
+    }
+}
