@@ -29,6 +29,7 @@ function start() {
     if (date == undefined || (date.getMinutes() != time.getMinutes() || date.getHours() != time.getHours())) {
         date = time;
         let hours = time.getHours();
+        const original = hours;
         const minutes = time.getMinutes();
         if (!isBrowserLocale24h()) {
             hours = hours % 12;
@@ -39,12 +40,11 @@ function start() {
         const m1 = Math.floor(minutes / 10);
         const m2 = minutes % 10;
         if (blankMethod) setClockViaBlank(h1, h2, m1, m2);
-        else setClock(h1, h2, m1, m2);
+        else setClock(h1, h2, m1, m2, original);
     }
 }
 
-function setClock(h1, h2, m1, m2) {
-    let hours = (h1 * 10) + h2;
+function setClock(h1, h2, m1, m2, hours) {
     setTimeout(() => put(h1, digits[0]),
         timeout * 0, h1);
     setTimeout(() => put(h2, digits[1]),
@@ -128,7 +128,7 @@ function testRandom() {
 
     console.log(`Setting time to ${h1}${h2}:${m1}${m2}.`);
 
-    setClock(h1, h2, m1, m2);
+    setClock(h1, h2, m1, m2, (h1 * 10 + h2));
 }
 
 function put(number, onContainer) {

@@ -157,6 +157,9 @@ main {
 
 .am,
 .pm {
+    position: absolute;
+    right: 0;
+    top: 0;
     display: none;
     background: #0000;
     width: 50px;
@@ -178,8 +181,10 @@ main {
 }
 
 .notation-area {
+    position: relative;
+    width: 50px;
+    align-self: flex-end;
     height: 50px;
-    align-self: last baseline;
 }
 
 .grid-child {
@@ -218,10 +223,6 @@ main {
         margin: 15px;
         width: 2rem;
         height: 2rem;
-    }
-    .notation-area {
-        bottom: 20%;
-        right: 18%;
     }
     .colon-1 {
         display: none;
