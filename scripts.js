@@ -1,13 +1,27 @@
 let timeout = 100;
+const numbers = [
+    [0, 1, 2, 3, 5, 6, 8, 9, 11, 12, 13, 14],
+    [1, 2, 5, 8, 11, 14],
+    [0, 1, 2, 5, 6, 7, 8, 9, 12, 13, 14],
+    [0, 1, 2, 5, 6, 7, 8, 11, 12, 13, 14],
+    [0, 2, 3, 5, 6, 7, 8, 11, 14],
+    [0, 1, 2, 3, 6, 7, 8, 11, 12, 13, 14],
+    [0, 1, 2, 3, 6, 7, 8, 9, 11, 12, 13, 14],
+    [0, 1, 2, 5, 8, 11, 14],
+    [0, 1, 2, 3, 5, 6, 7, 8, 9, 11, 12, 13, 14],
+    [0, 1, 2, 3, 5, 6, 7, 8, 11, 12, 13, 14]
+];
 var date;
+var wasPM;
 
 const isBrowserLocale24h = () =>
     !new Intl.DateTimeFormat(navigator.language, { hour: "numeric" })
     .format(0)
     .match(/AM/);
 
-$().ready(() => {
-    let digits = ['hmsd', 'hlsd', 'mmsd', 'mlsd'];
+const digits = ['hmsd', 'hlsd', 'mmsd', 'mlsd'];
+
+$(() => {
     digits.forEach(digit => {
         let divs = "";
         for (let i = 0; i < 15; i++) {
@@ -28,36 +42,58 @@ function start() {
         date = time;
         const hours = time.getHours();
         const minutes = time.getMinutes();
-        console.log((hours / 10));
-        setTimeout(() => put(Math.floor(hours / 10), 'hmsd'), timeout * 0, hours);
-        setTimeout(() => put(hours % 10, 'hlsd'), timeout * 1, hours);
-        setTimeout(() => $('.colon').fadeIn().css('display', 'grid'), timeout * 2, hours);
-        setTimeout(() => put(Math.floor(minutes / 10), 'mmsd'), timeout * 3, minutes);
-        setTimeout(() => put(minutes % 10, 'mlsd'), timeout * 4, minutes);
-        if (isBrowserLocale24h) {
-            const ampm = hours >= 12 ? '.am' : '.pm';
-            const pmam = hours <= 12 ? '.am' : '.pm';
+        const h1 = Math.floor(hours / 10);
+        const h2 = hours % 10;
+        const m1 = Math.floor(minutes / 10);
+        const m2 = minutes % 10;
+        setClock(h1, h2, m1, m2);
+    }
+}
+
+function setClock(h1, h2, m1, m2) {
+    let hours = (h1 * 10) + h2;
+    setTimeout(() => put(h1, digits[0]),
+        timeout * 0, h1);
+    setTimeout(() => put(h2, digits[1]),
+        timeout * 1, h2);
+    setTimeout(() => $('.colon').fadeIn().css('display', 'grid'),
+        timeout * 2, hours);
+    setTimeout(() => put(m1, digits[2]),
+        timeout * 3, m1);
+    setTimeout(() => put(m2, digits[3]),
+        timeout * 4, m2);
+
+
+    if (isBrowserLocale24h) {
+        const isPM = hours >= 12;
+        if (wasPM == undefined || wasPM != isPM) {
+            wasPM = isPM;
             setTimeout(() => {
-                $(ampm).fadeOut();
-                $(pmam).fadeIn();
-            }, timeout * 5, ampm)
+                if (isPM == true) {
+                    $('.pm').fadeIn();
+                    $('.am').fadeOut();
+                } else {
+                    $('.am').fadeIn();
+                    $('.pm').fadeOut();
+                }
+            }, timeout * 5, wasPM, isPM);
         }
     }
 }
 
+function testRandom() {
+    const h1 = Math.round(Math.random() * 2);
+    const h2 = (h1 == 2) ? Math.round(Math.random() * 3) :
+        Math.round(Math.random() * 9);
+    const m1 = Math.round(Math.random() * 5);
+    const m2 = Math.round(Math.random() * 9);
+
+    console.log(`Setting time to ${h1}${h2}:${m1}${m2}.`);
+
+    setClock(h1, h2, m1, m2);
+}
+
 function put(number, onContainer) {
-    let numbers = [
-        [0, 1, 2, 3, 5, 6, 8, 9, 11, 12, 13, 14],
-        [1, 2, 5, 8, 11, 14],
-        [0, 1, 2, 5, 6, 7, 8, 9, 12, 13, 14],
-        [0, 1, 2, 5, 6, 7, 8, 11, 12, 13, 14],
-        [0, 2, 3, 5, 6, 7, 8, 11, 14],
-        [0, 1, 2, 3, 6, 7, 8, 11, 12, 13, 14],
-        [0, 1, 2, 3, 6, 7, 8, 9, 11, 12, 13, 14],
-        [0, 1, 2, 5, 8, 11, 14],
-        [0, 1, 2, 3, 5, 6, 7, 8, 9, 11, 12, 13, 14],
-        [0, 1, 2, 3, 5, 6, 7, 8, 11, 12, 13, 14]
-    ];
     let stack = numbers[number];
     setOut(0, stack, onContainer);
 };
@@ -78,12 +114,11 @@ function setOut(start, stack, onContainer) {
 }
 
 function setColor(location, onContainer, toStatus) {
-    let id = `#${onContainer}-${location}`;
-    let status = ($(id).hasClass('colored-location'));
+    const id = `#${onContainer}-${location}`;
+    const status = ($(id).hasClass('colored-location'));
     if (status !== toStatus) {
-        if (toStatus == true) {
-            $(id).animate({ opacity: 1 });
-        } else $(id).animate({ opacity: 0 });
+        if (toStatus == true) $(id).animate({ opacity: 1 });
+        else $(id).animate({ opacity: 0 });
         $(id).toggleClass('colored-location');
     }
 };

@@ -3,6 +3,11 @@
     background-color: #000;
 }
 
+:root {
+    --color-start: #555;
+    --color-stop: #333;
+}
+
 html,
 body {
     overflow: hidden;
@@ -150,17 +155,19 @@ main {
     display: none;
     background: #0000;
     width: 50px;
+    position: absolute;
+    top: 0%;
+    left: 0%;
 }
 
-.am>path,
-.pm>path {
-    stroke: url(#am-pm-gradient);
-    fill: url(#am-pm-gradient);
+.am path {
+    stroke: url(#am-gradient);
+    fill: url(#am-gradient);
 }
 
-#am-pm-gradient {
-    --color-start: #555;
-    --color-stop: #333;
+.pm path {
+    stroke: url(#pm-gradient);
+    fill: url(#pm-gradient);
 }
 
 .notation-area {
