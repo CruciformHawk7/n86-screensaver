@@ -2,6 +2,7 @@ let timeout = 300;
 let digits = ['hmsd', 'hlsd', 'mmsd', 'mlsd'];
 var date;
 var wasPM;
+var blankMethod = false;
 
 const isBrowserLocale24h = () =>
     !new Intl.DateTimeFormat(navigator.language, { hour: "numeric" })
@@ -33,7 +34,8 @@ function start() {
         const h2 = hours % 10;
         const m1 = Math.floor(minutes / 10);
         const m2 = minutes % 10;
-        setClockViaBlank(h1, h2, m1, m2);
+        if (blankMethod) setClockViaBlank(h1, h2, m1, m2);
+        else setClock(h1, h2, m1, m2);
     }
 }
 
@@ -43,9 +45,11 @@ function setClock(h1, h2, m1, m2) {
         timeout * 0, h1);
     setTimeout(() => put(h2, digits[1]),
         timeout * 1, h2);
-    setTimeout(() => $('.colon').fadeIn()
-        .css('display', 'grid'),
-        timeout * 2, hours);
+    setTimeout(() => {
+            $('.colon-1').fadeIn();
+            $('.colon-2').fadeIn();
+        },
+        timeout * 2);
     setTimeout(() => put(m1, digits[2]),
         timeout * 3, m1);
     setTimeout(() => put(m2, digits[3]),
@@ -79,9 +83,11 @@ function setClockViaBlank(h1, h2, m1, m2) {
         timeout * 1, h2);
     setTimeout(() => put(h2, digits[1]),
         timeout * 1.5, h2);
-    setTimeout(() => $('.colon').fadeIn()
-        .css('display', 'grid'),
-        timeout * 2, hours);
+    setTimeout(() => {
+            $('.colon-1').fadeIn();
+            $('.colon-2').fadeIn();
+        },
+        timeout * 2);
     setTimeout(() => put(10, digits[2]),
         timeout * 3, m1);
     setTimeout(() => put(m1, digits[2]),
